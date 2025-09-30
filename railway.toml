@@ -1,0 +1,9 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "npm start"
+
+[[deploy.exposedPorts]]
+port = 3000
+protocol = "http"

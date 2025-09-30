@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { MCPServer, Tool } from '@la-rebelion/mcp-server';
 import { z } from 'zod';
+import express from 'express';
 import { createPaste } from './tools/createPaste.js';
 import { readPaste } from './tools/readPaste.js';
 import { listPastes } from './tools/listPastes.js';
@@ -104,11 +105,35 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
+// Create Express app for web server
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Add a simple health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', service: 'mcp-pastebin-server' });
+});
+
+// Add a simple MCP endpoint that could be used by web clients
+app.get('/mcp', (req, res) => {
+  res.json({
+    message: 'MCP server is running',
+    tools: ['create_paste', 'read_paste', 'list_user_pastes'],
+    description: 'MCP server for interacting with Pastebin API'
+  });
+});
+
 // Start the server
 console.log('Starting Pastebin MCP Server...');
 console.log('Available tools: create_paste, read_paste, list_user_pastes');
 
+// Start both MCP and web servers
 server.run().catch(error => {
-  console.error('Failed to start server:', error);
+  console.error('Failed to start MCP server:', error);
   process.exit(1);
+});
+
+// Start Express web server
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Web server running on port ${port}`);
 });
