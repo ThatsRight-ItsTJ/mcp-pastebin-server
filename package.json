@@ -1,0 +1,20 @@
+{
+  "name": "mcp-pastebin-server",
+  "version": "1.0.0",
+  "description": "MCP server for interacting with Pastebin API",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["mcp", "pastebin", "server", "ai"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@la-rebelion/mcp-server": "^0.2.1",
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.3",
+    "zod": "^3.24.1"
+  }
+}

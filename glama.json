@@ -1,0 +1,5 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": ["your-github-username"],
+  "tools": ["create_paste", "read_paste", "list_user_pastes"]
+}
